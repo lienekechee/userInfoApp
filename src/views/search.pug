@@ -1,0 +1,15 @@
+doctype html
+
+html
+head
+	title Search page
+body 
+	h1 Search user database
+	form(action= "/searchUser" method= "POST")
+		p 
+		input(type="text" name="usersearch" placeholder= "first or last name")
+		input(type="submit" value= "search")
+	p 
+	a(class= "button" href= "http://localhost:3000/newUser") Register
+	br
+	a(class= "button" href= "http://localhost:3000") Home

@@ -1,0 +1,14 @@
+doctype html
+html
+	head
+		title User Matches
+	body
+		h1 Search results
+		p #{searchResult.firstname + " " + searchResult.lastname + ": " + searchResult.email}
+		br
+		h3
+		a(class= "button" href= "http://localhost:3000/search") Search again
+		br
+		a(class= "button" href= "http://localhost:3000/newUser") Register
+		br
+		a(class= "button" href= "http://localhost:3000/") Home

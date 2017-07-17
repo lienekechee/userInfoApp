@@ -1,0 +1,17 @@
+doctype html
+
+html
+	head
+		title
+	body
+		h1 Add User
+		p
+		form(action= "addUser" method= "POST")
+			input(type="text" name="firstname" placeholder="first name")
+			input(type="text" name="lastname" placeholder="last name")
+			input(type="text" name="email" placeholder="email")
+			input(type="submit" value= "add")
+		h3
+			a(class= "button" href= "http://localhost:3000/search") Search
+			br
+			a(class= "button" href= "http://localhost:3000") Home
