@@ -73,18 +73,21 @@ app.post("/searchUser", function(req, res) {
         var userData = parsedData
             //this route renders a page that display users input into the search bar that match to 
             //those on the database.
+
+        var match = ""
         for (i = 0; i < userData.length; i++) {
 
             if (req.body.usersearch === userData[i].firstname || req.body.usersearch === userData[i].lastname) {
                 console.log(userData[i])
 
-                res.render("match", {searchResult: userData[i]})
+               match = userData[i]
             }
 
         }
-        return res.send('User Not Found');
-
+        // return res.send('User Not Found');
+        res.render("match", {searchResult: match});
     })
+    
 })
 
 

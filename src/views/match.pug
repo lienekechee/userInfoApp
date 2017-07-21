@@ -4,8 +4,11 @@ html
 		title User Matches
 	body
 		h1 Search results
-		p #{searchResult.firstname + " " + searchResult.lastname + ": " + searchResult.email}
-		br
+		if searchResult
+			p #{searchResult.firstname + " " + searchResult.lastname + ": " + searchResult.email}
+			br
+		else
+			p No user found!
 		h3
 		a(class= "button" href= "http://localhost:3000/search") Search again
 		br
