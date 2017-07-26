@@ -3,13 +3,39 @@ doctype html
 html
 head
 	title Search page
+	link(rel='stylesheet', type='text/css', href='css/main.css')
+	script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+	script(src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js")
+	
+
 body 
 	h1 Search user database
 	form(action= "/searchUser" method= "POST")
 		p 
-		input(type="text" name="usersearch" placeholder= "first or last name")
+		input(type="text" name="usersearch" placeholder= "first or last name" id="searchField")
 		input(type="submit" value= "search")
 	p 
 	a(class= "button" href= "http://localhost:3000/newUser") Register
 	br
 	a(class= "button" href= "http://localhost:3000") Home
+	br
+	div.results
+		
+
+	script.
+		$(document).ready(function(){
+			$("#searchField").keyup(function(){
+
+				var input = {input: $("#searchField").val()};
+
+				console.log (input)
+
+			$.get("/autocomplete", input, function(response){
+
+				$(".results").html("<p>" + response.matchingUsers + "</p>")
+
+			})
+
+
+			})
+		})

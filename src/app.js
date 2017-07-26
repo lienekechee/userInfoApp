@@ -33,19 +33,14 @@ var fs = require("fs")
 var bodyParser = require("body-parser")
 var pug = require("pug")
 
-app.set("views", "./views")
+app.set("views", "src/views")
 app.set("view engine", "pug")
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true })); //true accpet any data type
 
-// var JSONreader = require("../json-file-reader.js")
-// JSONreader.readJSON("./users.json", ){
-
-// })
-// var userData = userData
-
-
+// GET INDEX WITH USERS
 app.get("/", function(req, res) {
-    fs.readFile("./users.json", function(error, data) {
+    fs.readFile("src/users.json", function(error, data) {
         if (error) {
             throw error
         }
@@ -59,12 +54,14 @@ app.get("/", function(req, res) {
     });
 });
 
+//GET SEARCH FORM
 app.get("/search", function(req, res) {
     res.render("search")
 })
 
+//POST SEARCH QUERY TO DATABASE TO CHECK FOR MATCH
 app.post("/searchUser", function(req, res) {
-    fs.readFile("./users.json", function(error, data) {
+    fs.readFile("src/users.json", function(error, data) {
         if (error) {
             throw error
         }
@@ -87,17 +84,18 @@ app.post("/searchUser", function(req, res) {
         // return res.send('User Not Found');
         res.render("match", {searchResult: match});
     })
-    
+
 })
 
-
+//GET NEW USER FORM
 app.get("/newUser", function(req, res) {
 	res.render ("newUserForm")
 
 })
 
+//POST NEW USERS TO JSON FILE
 app.post("/addUser", function (req, res){
-	fs.readFile("./users.json", function(error, data) {
+	fs.readFile("src/users.json", function(error, data) {
         if (error) {
             throw error
         }
@@ -112,7 +110,7 @@ app.post("/addUser", function (req, res){
         var newJSON = JSON.stringify(parsedData);
         console.log(newJSON);
 
-        fs.writeFile("./users.json", newJSON, function (err){
+        fs.writeFile("src/users.json", newJSON, function (err){
         	if (err){
 
                 throw err
@@ -123,6 +121,47 @@ app.post("/addUser", function (req, res){
 
 	})
 })
+
+//GET AUTOCOMPLETE FROM DATABASE
+app.get("/autocomplete", function(req, res) {
+    fs.readFile("src/users.json", function(error, data) {
+        if (error) {
+            throw error
+        }
+
+        var parsedData = JSON.parse(data)
+
+var input = req.query.input; 
+console.log (input); 
+
+var matchingUsers = []
+  //if statement req.query.input = " "/ null then matchingUsers = []
+if (req.query.input == ""){
+    matchingUsers == []
+}
+
+
+//.toLowerCase employed for both input and parsedData keys to creat case-insensitivity.
+else{
+    for (var i = 0; i < parsedData.length; i++){
+        if(parsedData[i].firstname.toLowerCase().indexOf(input.toLowerCase()) !== -1 || parsedData[i].lastname.toLowerCase().indexOf(input.toLowerCase()) !== -1){
+            matchingUsers.push(parsedData[i].firstname + " " + parsedData[i].lastname)
+            
+        } 
+
+
+
+
+        console.log (matchingUsers)
+    }
+}
+    
+res.send ({matchingUsers: matchingUsers})
+
+    });
+});
+        
+
 
 //
 
