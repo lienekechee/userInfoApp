@@ -74,7 +74,7 @@ app.post("/searchUser", function(req, res) {
         var match = ""
         for (i = 0; i < userData.length; i++) {
 
-            if (req.body.usersearch === userData[i].firstname || req.body.usersearch === userData[i].lastname) {
+            if (req.body.usersearch.toLowerCase() === userData[i].firstname.toLowerCase() || req.body.usersearch.toLowerCase() === userData[i].lastname.toLowerCase()) {
                 console.log(userData[i])
 
                match = userData[i]
@@ -145,7 +145,7 @@ if (req.query.input == ""){
 else{
     for (var i = 0; i < parsedData.length; i++){
         if(parsedData[i].firstname.toLowerCase().indexOf(input.toLowerCase()) !== -1 || parsedData[i].lastname.toLowerCase().indexOf(input.toLowerCase()) !== -1){
-            matchingUsers.push(parsedData[i].firstname + " " + parsedData[i].lastname)
+            matchingUsers.push(parsedData[i].firstname + " " + parsedData[i].lastname + "<br>")
             
         } 
 
@@ -156,7 +156,7 @@ else{
     }
 }
     
-res.send ({matchingUsers: matchingUsers})
+res.send ({matchingUsers: matchingUsers.join(" ")})
 
     });
 });

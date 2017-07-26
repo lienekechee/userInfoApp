@@ -1,5 +1,35 @@
+body {
+	font-family: 'Fira Sans', sans-serif;
+	text-align: center;
+	background-color: #84b5ce;
+	color: #ffffff;
+}
+
 .results {
 	width: 400px;
 	height: 300px;
-	background-color: blue;
+/*	background-color: #84b5ce;*/
+	font-family: 'Fira Sans', sans-serif;
+	margin: auto;
+	width: 50%;
+	color: #ffffff;
+}
+
+.userlist {
+	text-align: left;
+	margin: auto;
+	width: 25%;
+	color: #ffffff;
+}
+
+a:link {
+    color: #ffffff;
+}
+
+/* visited link */
+a:visited {
+    color: #dee2e8;
+}
+input {
+	margin: 10px;
 }

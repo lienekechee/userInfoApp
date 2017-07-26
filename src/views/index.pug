@@ -2,6 +2,8 @@ doctype html
 html
 head
 	title User Info App
+	link(rel='stylesheet', type='text/css', href='css/main.css')
+	link(href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet")
 
 body
 	h1 User Database
@@ -9,11 +11,11 @@ body
 		a(class= "button" href= "http://localhost:3000/search") Search
 		br
 		a(class= "button" href= "http://localhost:3000/newUser") Register
-	ul 
-	each user in userData
-		//- li First name: #{user.firstname}
-		//- li Last name: #{user.lastname}
-		//- li Email: #{user.email}
-		//- br
-		p #{user.firstname} #{user.lastname}: #{user.email}
-		br
+	div.userlist
+		each user in userData
+			//- li First name: #{user.firstname}
+			//- li Last name: #{user.lastname}
+			//- li Email: #{user.email}
+			//- br
+			p #{user.firstname} #{user.lastname}: #{user.email}
+			
