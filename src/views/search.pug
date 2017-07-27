@@ -32,11 +32,14 @@ body
 
 				console.log (input)
 
-			$.get("/autocomplete", input, function(response){
+			var ajaxCall = $.get("/autocomplete", input, function(response){
 
 				$(".results").html("<p>" + response.matchingUsers + "</p>")
 
-			})
+			});
+
+			setTimeout(ajaxCall, 300)
+ 
 
 
 			})

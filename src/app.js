@@ -87,6 +87,9 @@ app.post("/searchUser", function(req, res) {
 
 })
 
+//
+
+
 //GET NEW USER FORM
 app.get("/newUser", function(req, res) {
 	res.render ("newUserForm")
